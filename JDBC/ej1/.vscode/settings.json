@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/home/crixo/DEV/JDBC/mariadb-java-client-3.3.3.jar",
+        "/home/crixo/DEV/mariadb-java-client-3.3.3.jar"
+    ]
+}
