@@ -14,6 +14,12 @@ public class Alumno {
         this.notaMedia = notaMedia;
         this.curso = curso;
     }
+    public Alumno(String nombre, LocalDate fechaNacimiento, double notaMedia, String curso){
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+        this.notaMedia = notaMedia;
+        this.curso = curso;
+    }
 
     public int getId() {
         return id;
@@ -55,14 +61,9 @@ public class Alumno {
         this.curso = (curso.length() == 2) ? curso : null;
     }
     @Override
-    public String toString(){
-        return "Alumno{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", fechaNacimiento=" + fechaNacimiento +
-                ", notaMedia=" + notaMedia +
-                ", curso='" + curso + '\'' +
-                '}';
-    }
+public String toString() {
+    return String.format("| %-4d | %-20s | %-16s | %-10.2f | %-5s |",
+                        id, nombre, fechaNacimiento, notaMedia, curso);
+}
 }
 

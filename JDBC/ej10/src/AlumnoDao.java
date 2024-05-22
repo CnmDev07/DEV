@@ -77,33 +77,72 @@ public class AlumnoDao {
         }
     }
     public void delete (int id){
+        int filasAfectadas;
         String consultaSQL ="DELETE FROM estudiantes WHERE id = ?";
         try (PreparedStatement statement = conexion.prepareStatement(consultaSQL)){
             statement.setInt(1, id);
-            statement.executeUpdate();
+            filasAfectadas = statement.executeUpdate();
+            if(filasAfectadas > 0){
+                System.out.println("Alumno borrado");
+            }else{
+                System.out.println("No existe ningun alumno con esa ID");
+            }
         }catch(SQLException e){
             e.printStackTrace();
         }
     }
     public List<Alumno> readAll(){
+        int id;
+        String nombre, curso;
+        LocalDate fechaNacimiento;
+        double notaMedia;
+        Alumno alumno = null;
+
         String consultaSQL = "SELECT * FROM estudiantes";
         List<Alumno> listaAlumnos = new ArrayList<>();
         
         try(PreparedStatement statement = conexion.prepareStatement(consultaSQL)){
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
-                int id = resultSet.getInt("id");
-                String nombre = resultSet.getString("nombre");
-                LocalDate fechaNacimiento = resultSet.getDate("fecha_nacimiento").toLocalDate();
-                double notaMedia = resultSet.getDouble("nota_media");
-                String curso = resultSet.getString("curso");
-                Alumno alumno = new Alumno (id, nombre, fechaNacimiento, notaMedia, curso);
+                id = resultSet.getInt("id");
+                nombre = resultSet.getString("nombre");
+                fechaNacimiento = resultSet.getDate("fecha_nacimiento").toLocalDate();
+                notaMedia = resultSet.getDouble("nota_media");
+                curso = resultSet.getString("curso");
+                alumno = new Alumno (id, nombre, fechaNacimiento, notaMedia, curso);
                 listaAlumnos.add(alumno);
             }
         }catch(SQLException e){
             e.printStackTrace();
         }
         return listaAlumnos;
+    }
+    
+    public List<Alumno> leerPorCurso(String curso){
+        int id;
+        String nombre;
+        LocalDate fechaNacimiento;
+        double notaMedia;
+        Alumno alumno = null;
+
+        String consultaSQL = "SELECT * FROM estudiantes WHERE curso = ?";
+        List<Alumno> listaAlumnosPorCurso = new ArrayList<>();
+
+        try(PreparedStatement statement = conexion.prepareStatement(consultaSQL)){
+            statement.setString(1, curso);
+            ResultSet resultSet =statement.executeQuery();
+            while (resultSet.next()){
+                id = resultSet.getInt("id");
+                nombre = resultSet.getString("nombre");
+                fechaNacimiento = resultSet.getDate("fecha_nacimiento").toLocalDate();
+                notaMedia = resultSet.getDouble("nota_media");
+                alumno = new Alumno(id, nombre, fechaNacimiento, notaMedia, curso);
+                listaAlumnosPorCurso.add(alumno);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return listaAlumnosPorCurso;
     }
     
 }
