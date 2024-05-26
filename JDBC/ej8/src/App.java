@@ -41,5 +41,6 @@ public class App {
                 e.printStackTrace();
             }
         }
+        sc.close();
     }
 }

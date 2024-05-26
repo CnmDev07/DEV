@@ -26,6 +26,16 @@ public class AlumnoDao {
             e.printStackTrace();
         }
     }
+    public void desconectar() {
+        if (conexion != null) {
+            try {
+                conexion.close();
+                System.out.println("Conexión cerrada con éxito");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     public void create(Alumno alumno){
         String consultaSQL = "INSERT INTO estudiantes (id, nombre, fecha_nacimiento, nota_media, curso) VALUES (?, ?, ?, ?, ?)";
         try(PreparedStatement statement = conexion.prepareStatement(consultaSQL)){
@@ -93,7 +103,8 @@ public class AlumnoDao {
     }
     public List<Alumno> readAll(){
         int id;
-        String nombre, curso;
+        String nombre;
+        String curso;
         LocalDate fechaNacimiento;
         double notaMedia;
         Alumno alumno = null;

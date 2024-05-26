@@ -38,5 +38,6 @@ public class App {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        sc.close();
     }
 }
