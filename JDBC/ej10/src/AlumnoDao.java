@@ -74,7 +74,7 @@ public class AlumnoDao {
         return alumnoEncontrado;
     }
     public void update (Alumno alumno){
-        String consultaSQL = "UPDATE estudiantes SET nombre = ?, fecha_nacimiento = ?, nota_media = ?, curso = ?, WHERE id = ?";
+        String consultaSQL = "UPDATE estudiantes SET nombre = ?, fecha_nacimiento = ?, nota_media = ?, curso = ? WHERE id = ?";
         try(PreparedStatement statement = conexion.prepareStatement(consultaSQL)){
             statement.setString(1, alumno.getNombre());
             statement.setDate(2,Date.valueOf(alumno.getFechaNacimiento()) );

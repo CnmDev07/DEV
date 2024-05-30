@@ -114,7 +114,7 @@ public class App {
         alumnoActualizar = alumnoDao.read(idActualizar);
         if (alumnoActualizar != null) {
             System.out.print("Ingrese el nuevo nombre del alumno: ");
-            sc.nextLine(); // consume the newline
+            sc.nextLine(); 
             String nuevoNombre = sc.nextLine();
             alumnoActualizar.setNombre(nuevoNombre);
             alumnoDao.update(alumnoActualizar);
